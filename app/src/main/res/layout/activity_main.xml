@@ -1,0 +1,204 @@
+<?xml version="1.0" encoding="utf-8"?>
+<androidx.constraintlayout.widget.ConstraintLayout
+    xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:app="http://schemas.android.com/apk/res-auto"
+    android:layout_width="match_parent"
+    android:layout_height="match_parent"
+    android:background="#000000">
+
+    <androidx.camera.view.PreviewView
+        android:id="@+id/previewView"
+        android:layout_width="match_parent"
+        android:layout_height="match_parent"
+        app:layout_constraintTop_toTopOf="parent"
+        app:layout_constraintBottom_toBottomOf="parent"
+        app:layout_constraintStart_toStartOf="parent"
+        app:layout_constraintEnd_toEndOf="parent" />
+
+    <com.example.blindassist.OverlayView
+        android:id="@+id/overlayView"
+        android:layout_width="match_parent"
+        android:layout_height="match_parent"
+        app:layout_constraintTop_toTopOf="parent"
+        app:layout_constraintBottom_toBottomOf="parent"
+        app:layout_constraintStart_toStartOf="parent"
+        app:layout_constraintEnd_toEndOf="parent" />
+
+    <!-- Panel Atas -->
+    <LinearLayout
+        android:id="@+id/topPanel"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:background="#CC000000"
+        android:orientation="horizontal"
+        android:padding="8dp"
+        android:gravity="center_vertical"
+        app:layout_constraintTop_toTopOf="parent"
+        app:layout_constraintStart_toStartOf="parent"
+        app:layout_constraintEnd_toEndOf="parent">
+
+        <TextView
+            android:id="@+id/tvFps"
+            android:layout_width="0dp"
+            android:layout_height="wrap_content"
+            android:layout_weight="1"
+            android:text="0 FPS"
+            android:textColor="#00FF00"
+            android:textSize="12sp" />
+
+        <TextView
+            android:id="@+id/tvStatus"
+            android:layout_width="0dp"
+            android:layout_height="wrap_content"
+            android:layout_weight="2"
+            android:text="Memulai..."
+            android:textColor="#FFFFFF"
+            android:textSize="12sp"
+            android:gravity="center" />
+
+        <TextView
+            android:id="@+id/tvObjectCount"
+            android:layout_width="0dp"
+            android:layout_height="wrap_content"
+            android:layout_weight="1"
+            android:text="0 objek"
+            android:textColor="#FFFF00"
+            android:textSize="12sp"
+            android:gravity="end" />
+
+    </LinearLayout>
+
+    <!-- Panel Peringatan -->
+    <TextView
+        android:id="@+id/tvWarning"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:background="#CCFF0000"
+        android:text="⚠ PERINGATAN: Objek Dekat!"
+        android:textColor="#FFFFFF"
+        android:textSize="16sp"
+        android:textStyle="bold"
+        android:gravity="center"
+        android:padding="8dp"
+        android:visibility="gone"
+        app:layout_constraintTop_toBottomOf="@id/topPanel"
+        app:layout_constraintStart_toStartOf="parent"
+        app:layout_constraintEnd_toEndOf="parent" />
+
+    <!-- Panel Arah -->
+    <LinearLayout
+        android:id="@+id/directionPanel"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:orientation="horizontal"
+        android:gravity="center"
+        android:padding="4dp"
+        app:layout_constraintBottom_toTopOf="@id/bottomPanel"
+        app:layout_constraintStart_toStartOf="parent"
+        app:layout_constraintEnd_toEndOf="parent">
+
+        <TextView
+            android:id="@+id/tvDirection"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:text=""
+            android:textColor="#00FFFF"
+            android:textSize="48sp"
+            android:textStyle="bold"
+            android:background="#AA000000"
+            android:padding="8dp" />
+
+    </LinearLayout>
+
+    <!-- Panel Bawah -->
+    <LinearLayout
+        android:id="@+id/bottomPanel"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:background="#CC000000"
+        android:orientation="vertical"
+        android:padding="10dp"
+        app:layout_constraintBottom_toBottomOf="parent"
+        app:layout_constraintStart_toStartOf="parent"
+        app:layout_constraintEnd_toEndOf="parent">
+
+        <TextView
+            android:id="@+id/tvDetectedObject"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:text="-"
+            android:textColor="#FFFFFF"
+            android:textSize="22sp"
+            android:textStyle="bold"
+            android:gravity="center" />
+
+        <TextView
+            android:id="@+id/tvDistance"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:text="Jarak: -"
+            android:textColor="#00FF00"
+            android:textSize="14sp"
+            android:gravity="center" />
+
+        <TextView
+            android:id="@+id/tvRecommendation"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:text="👉 JALAN BEBAS"
+            android:textColor="#00FF00"
+            android:textSize="16sp"
+            android:textStyle="bold"
+            android:gravity="center"
+            android:background="#AA000000"
+            android:padding="6dp"
+            android:layout_marginTop="4dp" />
+
+        <ProgressBar
+            android:id="@+id/progressConfidence"
+            style="?android:attr/progressBarStyleHorizontal"
+            android:layout_width="match_parent"
+            android:layout_height="8dp"
+            android:max="100"
+            android:progress="0"
+            android:progressTint="#00FF00"
+            android:layout_marginTop="4dp"
+            android:layout_marginBottom="4dp" />
+
+        <LinearLayout
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:orientation="horizontal"
+            android:layout_marginTop="4dp">
+
+            <Button
+                android:id="@+id/btnToggleDetection"
+                android:layout_width="0dp"
+                android:layout_height="36dp"
+                android:layout_weight="1"
+                android:text="⏸ Pause"
+                android:textSize="11sp"
+                android:layout_marginEnd="4dp" />
+
+            <Button
+                android:id="@+id/btnToggleSound"
+                android:layout_width="0dp"
+                android:layout_height="36dp"
+                android:layout_weight="1"
+                android:text="🔊 Suara"
+                android:textSize="11sp"
+                android:layout_marginEnd="4dp" />
+
+            <Button
+                android:id="@+id/btnToggleHaptic"
+                android:layout_width="0dp"
+                android:layout_height="36dp"
+                android:layout_weight="1"
+                android:text="📳 Haptic"
+                android:textSize="11sp" />
+
+        </LinearLayout>
+
+    </LinearLayout>
+
+</androidx.constraintlayout.widget.ConstraintLayout>
